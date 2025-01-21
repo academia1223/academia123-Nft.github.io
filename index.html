@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaslur NFT Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d0d1f;
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #5c67ed, #9b5cc3);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, #4a54d8, #8a4caf);
+        }
+
+        .btn-outline-light {
+            color: #ffffff;
+            border: 1px solid #ffffff;
+        }
+
+        .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #b0b0b0;
+        }
+
+        .image-card {
+            background-color: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 1rem;
+        }
+
+        .image-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .image-card .details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            color: #b0b0b0;
+        }
+
+        .image-card .details span {
+            font-size: 0.9rem;
+        }
+
+        .navbar {
+            background-color: #0d0d1f;
+        }
+
+        .navbar .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
+        }
+
+        .navbar .nav-link.active {
+            text-decoration: underline;
+        }
+
+        .gradient-text-logo {
+            font-family: 'Poppins', sans-serif;
+            /* Указанный шрифт */
+            font-size: 32px;
+            /* Размер шрифта */
+            font-weight: 700;
+            /* Жирность: bold */
+            line-height: 22px;
+            /* Высота строки */
+            letter-spacing: 1.5px;
+            /* Межбуквенный интервал */
+
+            /* Градиентный цвет */
+            background: linear-gradient(90deg, #8B48E7, #3D78E0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            /* Для совместимости */
+        }
+
+        .gradient-text-home {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 12px;
+            /* Размер текста */
+            font-weight: 700;
+            /* Bold */
+            line-height: 22px;
+            /* Высота строки */
+            letter-spacing: 1.5px;
+            /* Межбуквенный интервал */
+            text-transform: uppercase;
+            /* Преобразование в верхний регистр */
+
+            /* Градиент */
+            background: linear-gradient(90deg, #8B48E7, #3D78E0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            /* Для совместимости */
+
+            /* Подчеркивание */
+            text-decoration: underline;
+        }
+
+        .custom-nav-link {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            color: #BCBCBC;
+            /* Цвет текста */
+            font-size: 12px;
+            /* Размер текста */
+            font-weight: 500;
+            /* Medium */
+            line-height: 22px;
+            /* Высота строки */
+            letter-spacing: 1.5px;
+            /* Межбуквенный интервал */
+
+            text-decoration: none;
+            text-transform: uppercase;
+            /* Преобразование в верхний регистр */
+        }
+
+        .nav-link {
+            color: #BCBCBC;
+        }
+
+        .btn-nav-create {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 14px;
+            /* Размер текста */
+            font-weight: 600;
+            /* Bold */
+            text-transform: uppercase;
+            /* Верхний регистр */
+            letter-spacing: 1px;
+            /* Межбуквенный интервал */
+            color: #BCBCBC;
+            /* Белый текст */
+            background-color: transparent;
+            /* Прозрачный фон */
+            border: 1px solid #BCBCBC;
+            /* Белая рамка */
+            border-radius: 10px;
+            /* Закругленные углы */
+            padding: 10px 30px;
+            /* Отступы */
+            transition: all 0.3s ease-in-out;
+            /* Плавный переход */
+        }
+
+        .btn-create:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Полупрозрачный фон при наведении */
+        }
+
+        .btn-signin {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 14px;
+            /* Размер текста */
+            font-weight: 600;
+            /* Bold */
+            text-transform: uppercase;
+            /* Верхний регистр */
+            letter-spacing: 1px;
+            /* Межбуквенный интервал */
+            color: #BCBCBC;
+            /* Белый текст */
+            background-color: transparent;
+            /* Прозрачный фон */
+            border: none;
+            /* Без рамки */
+            cursor: pointer;
+            /* Указатель при наведении */
+        }
+
+        .btn-explore {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 16px;
+            /* Размер текста */
+            font-weight: 600;
+            /* Полужирный */
+            letter-spacing: 1px;
+            /* Межбуквенный интервал */
+            color: #ffffff;
+            /* Белый текст */
+            background: linear-gradient(90deg, #834DFF, #3D78E0);
+            /* Градиентный фон */
+            border: none;
+            /* Без рамки */
+            border-radius: 16px;
+            /* Закругленные углы */
+            padding: 10px 30px;
+            /* Внутренние отступы */
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            width: 218px;
+            /* Ширина кнопки */
+            height: 60px;
+        }
+
+        /* Кнопка Create */
+        .btn-create {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 16px;
+            /* Размер текста */
+            font-weight: 600;
+            /* Полужирный */
+            letter-spacing: 1px;
+            /* Межбуквенный интервал */
+            color: #D7D7D7;
+            /* Белый текст */
+            background-color: transparent;
+            /* Прозрачный фон */
+            border: 1px solid #D7D7D7;
+            /* Белая рамка */
+            border-radius: 16px;
+            /* Закругленные углы */
+            padding: 10px 30px;
+            /* Внутренние отступы */
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            width: 218px;
+            /* Ширина кнопки */
+            height: 60px;
+        }
+
+        .text-Laura {
+            color: #ffffff;
+        }
+
+        .text-weth {
+            color: #D7D7D7;
+        }
+
+        .text-end {
+            color: #ffffff;
+        }
+
+        .discover-title {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 50px;
+        }
+
+        .filter-options {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 24px;
+            font-weight: 400;
+            color: #b0b0b0;
+        }
+
+        .filter-options a {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .filter-options .btn-filter {
+            background: linear-gradient(90deg, #834DFF, #3D78E0);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 25px;
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .btn-custom {
+            background: linear-gradient(90deg, #834DFF, #3D78E0);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 25px;
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .card {
+            background-color: #0d0d1f;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 298px;
+            height: 313px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            color: #b0b0b0;
+            padding: 15px;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 16px;
+            /* Размер текста */
+            font-weight: 600;
+
+        }
+
+        .card-text {
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 14px;
+        }
+
+        .btn-outline-light {
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 12px;
+            padding: 5px 25px;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #ffffff;
+            color: #0d0d1f;
+        }
+
+        .load-more {
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            font-size: 14px;
+            padding: 10px 30px;
+            font-weight: 500;
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .card-footer {
+            border-top: 1px solid #ffffff;
+            font-family: 'Poppins', sans-serif;
+            /* Шрифт Poppins */
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        .footer-section {
+            background-color: #0d0d1f;
+            padding: 40px 0;
+        }
+
+        .footer-section h2,
+        .footer-section p {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+
+        .footer-links a {
+            font-family: 'Poppins', sans-serif;
+            color: #b0b0b0;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .footer-links a:hover {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+
+        .social-icons i {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin-right: 10px;
+            color: #b0b0b0;
+        }
+
+        .social-icons i:hover {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Логотип -->
+            <a class="navbar-brand gradient-text-logo" href="#">Gaslur</a>
+            <!-- Центрированный блок навигации -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active gradient-text-home" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-nav-link" href="#">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-nav-link" href="#">Activity</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link custom-nav-link" href="#">How It Works</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Кнопки справа -->
+            <div class="d-flex gap-3">
+                <!-- Кнопка CREATE -->
+                <button class="btn btn-nav-create">CREATE</button>
+
+                <!-- Кнопка SIGN IN -->
+                <button class="btn btn-signin">SIGN IN</button>
+            </div>
+            <!-- Кнопка для мобильного меню -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Left Content -->
+                <div class="col-lg-6">
+                    <h1
+                        style="font-family: 'Poppins', sans-serif; font-size: 72px; font-weight: 600; line-height: 82px; letter-spacing: -2px;">
+                        Discover, collect, and charity in extraordinary NFT marketplace
+                    </h1>
+                    <p
+                        style="font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 400; line-height: 36px; letter-spacing: 0.5px;">
+                        In aenean posuere lorem risus nec. Tempor tincidunt aenean purus purus vestibulum nibh mi
+                        venenatis.
+                    </p>
+                    <div class="mt-4 d-flex gap-3">
+                        <!-- Кнопка Explore с градиентом -->
+                        <button class="btn btn-explore btn-lg">Explore</button>
+
+                        <!-- Кнопка Create с рамкой -->
+                        <button class="btn btn-create btn-lg">Create</button>
+                    </div>
+                </div>
+                <!-- Right Image Card -->
+                <div class="col-lg-6 ms-auto"
+                    style="width: 504px; height: 585px; padding: 20px; box-sizing: border-box;">
+                    <div class="image-card">
+                        <img src="img/unsplash_OG44d93iNJk.png" alt="NFT Art" class="img-fluid">
+                        <div class="details d-flex justify-content-between align-items-center mt-3">
+                            <div class="d-flex align-items-center">
+                                <!-- Аватарка -->
+                                <img src="img/Group 1248.png" alt="Avatar" class="rounded-circle me-3"
+                                    style="width: 53px; height: 53px; object-fit: cover;">
+                                <!-- Имя пользователя и валюта -->
+                                <div class="text-Laura">
+                                    <strong
+                                        style="font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; letter-spacing: 0px;">Laura</strong>
+                                    <br>
+                                    <div class="text-weth">
+                                        <span
+                                            style="font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 500; line-height: 24px; letter-spacing: 0px;">0.21
+                                            WETH</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Дополнительная информация -->
+                            <div class="text-end">
+                                <span
+                                    style="font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; letter-spacing: 0px;">We
+                                    Are Here</span> <br>
+                                <span
+                                    style="font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; line-height: 24px; letter-spacing: 0px;">❤️
+                                    25</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discover Section -->
+    <section class="discoverrr">
+        <div class="container py-5">
+            <!-- Заголовок и фильтры -->
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="discover-title">Discover</h2>
+
+                <!-- Центральная часть с выпадающими списками -->
+                <div class="d-flex justify-content-center flex-grow-1">
+                    <!-- Category Dropdown -->
+                    <div class="dropdown mx-2">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="categoryDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Category
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            <li><a class="dropdown-item" href="#">Option 1</a></li>
+                            <li><a class="dropdown-item" href="#">Option 2</a></li>
+                            <li><a class="dropdown-item" href="#">Option 3</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Cheapest Dropdown -->
+                    <div class="dropdown mx-2">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="cheapestDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Cheapest
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="cheapestDropdown">
+                            <li><a class="dropdown-item" href="#">Option 1</a></li>
+                            <li><a class="dropdown-item" href="#">Option 2</a></li>
+                            <li><a class="dropdown-item" href="#">Option 3</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Newest Dropdown -->
+                    <div class="dropdown mx-2">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="newestDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Newest
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="newestDropdown">
+                            <li><a class="dropdown-item" href="#">Option 1</a></li>
+                            <li><a class="dropdown-item" href="#">Option 2</a></li>
+                            <li><a class="dropdown-item" href="#">Option 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Кнопка Filter, выровненная по правому краю -->
+                <button class="btn btn-custom">Filter</button>
+            </div>
+
+            <!-- Карточки с изображениями -->
+            <div class="row g-4">
+                <!-- Карточка -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/unsplash_Lki74Jj7H-U.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Повторить карточки -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/unsplash_UD5drKd4H6w.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/1.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/2.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/3.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/4.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/5.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="img/6.png" alt="NFT Art">
+                        <div class="card-body d-flex justify-content-between">
+                            <h5 class="card-title text-white">Lorem Ipsum</h5>
+                            <p class="card-text text-white">1.20 Weth</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <span>Ends in 01:34:45</span>
+                            <button class="btn btn-outline-light ms-auto">Buy</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Load More Button -->
+            <button class="load-more">Load More</button>
+        </div>
+    </section>
+
+    <section class="footer">
+
+        <!-- Footer Section -->
+        <div class="footer-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>About Us</h2>
+                        <p>Etiam et id tincidunt faucibus mollis a sociis pretium fermentum quis magna faucibus lacus.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Marketplace</h2>
+                        <div class="footer-links">
+                            <a href="#">Home</a>
+                            <a href="#">Activity</a>
+                            <a href="#">Discover</a>
+                            <a href="#">Learn more</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Company</h2>
+                        <div class="footer-links">
+                            <a href="#">About Us</a>
+                            <a href="#">Services</a>
+                            <a href="#">Portfolio</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Contact</h2>
+                        <div class="footer-links">
+                            <a href="#">Facebook</a>
+                            <a href="#">Instagram</a>
+                            <a href="#">Twitter</a>
+                            <a href="#">Email</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="social-icons text-center mt-4">
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-instagram"></i>
+                    <i class="bi bi-twitter"></i>
+                </div>
+
+                <!-- Copyright -->
+                <div class="text-center mt-4">
+                    <p>&copy; 2021 Gaslur</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
